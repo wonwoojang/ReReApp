@@ -1,10 +1,10 @@
-package com.jww.rereapp
+package com.jww.rereapp.main.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.jww.rereapp.base.BaseActivity
 import com.jww.rereapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private val binding
