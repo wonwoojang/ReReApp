@@ -55,4 +55,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx:21.2.1'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.6'
     implementation 'com.google.firebase:firebase-config-ktx:21.3.0'
+
+//    DI - Koin 라이브러리 추가
+    implementation 'io.insert-koin:koin-android:3.4.0'
+    implementation 'io.insert-koin:koin-core:3.4.0'
 }
