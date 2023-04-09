@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'kotlin-kapt'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
@@ -59,4 +60,8 @@ dependencies {
 //    DI - Koin 라이브러리 추가
     implementation 'io.insert-koin:koin-android:3.4.0'
     implementation 'io.insert-koin:koin-core:3.4.0'
+
+//    Glide 라이브러리 추가
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    kapt 'com.github.bumptech.glide:compiler:4.15.1'
 }
