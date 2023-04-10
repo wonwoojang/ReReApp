@@ -12,4 +12,5 @@
     <color name="base_color">#FB87AD</color>
     <color name="base_reversal_color">#FFF6F9</color>
     <color name="line_color">#E9E9E9</color>
+    <color name="edit_search_hint_color">#ACACAC</color>
 </resources>

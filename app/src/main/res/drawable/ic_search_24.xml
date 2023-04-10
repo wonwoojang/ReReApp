@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="@dimen/dimens_24"
+        android:height="@dimen/dimens_24"
+        android:drawable="@drawable/ic_search" />
+</layer-list>

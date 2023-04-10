@@ -46,4 +46,16 @@
     <dimen name="dimens_39">39dp</dimen>
     <dimen name="dimens_40">40dp</dimen>
 
+
+    <dimen name="dimens_61">61dp</dimen>
+    <dimen name="dimens_62">62dp</dimen>
+    <dimen name="dimens_63">63dp</dimen>
+    <dimen name="dimens_64">64dp</dimen>
+    <dimen name="dimens_65">65dp</dimen>
+    <dimen name="dimens_66">66dp</dimen>
+    <dimen name="dimens_67">67dp</dimen>
+    <dimen name="dimens_68">68dp</dimen>
+    <dimen name="dimens_69">69dp</dimen>
+    <dimen name="dimens_70">70dp</dimen>
+
 </resources>
