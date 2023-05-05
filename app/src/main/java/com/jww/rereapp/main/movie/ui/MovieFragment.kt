@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -15,6 +13,7 @@ import com.jww.rereapp.base.BaseFragment
 import com.jww.rereapp.common.models.Movie
 import com.jww.rereapp.databinding.FragmentMovieBinding
 import com.jww.rereapp.databinding.ItemMovieListBinding
+import com.jww.rereapp.extension.repeatOnStarted
 import com.jww.rereapp.main.movie.MovieViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -58,11 +57,9 @@ class MovieFragment : BaseFragment() {
     }
 
     private fun observe() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.event().collectLatest {
-                    handle(it)
-                }
+        repeatOnStarted {
+            viewModel.eventFlow().collectLatest {
+                handle(it)
             }
         }
     }
