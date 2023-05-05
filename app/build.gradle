@@ -73,4 +73,11 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11'
 
     implementation 'com.google.code.gson:gson:2.10.1'
+
+//    코루틴
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-RC'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.0-RC'
+
+//    페이징 라이브러리
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
 }

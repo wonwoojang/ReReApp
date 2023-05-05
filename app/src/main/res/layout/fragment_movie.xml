@@ -2,6 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.jww.rereapp.main.movie.MovieViewModel" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,6 +32,7 @@
             android:hint="영화 제목을 입력 하세요."
             android:maxLength="30"
             android:maxLines="1"
+            android:text="@={vm.input}"
             android:textColorHint="@color/edit_search_hint_color"
             android:textSize="@dimen/dimens_16"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,10 +47,12 @@
             app:layout_constraintBottom_toBottomOf="@id/search" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"
             android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search" />
 
@@ -49,6 +60,7 @@
             layout="@layout/include_loading"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search" />
 
