@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.jww.rereapp.base.BaseFragment
 import com.jww.rereapp.databinding.FragmentInfoBinding
+import com.jww.rereapp.extension.throttleClick
 
 class InfoFragment : BaseFragment() {
     private var _binding: FragmentInfoBinding? = null
@@ -30,16 +31,16 @@ class InfoFragment : BaseFragment() {
     private fun bind() {
         binding.run {
             body.run {
-                notice.setOnClickListener {
+                notice.throttleClick {
                     showToast("구현 중인 기능입니다.")
                 }
-                faq.setOnClickListener {
+                faq.throttleClick {
                     showToast("구현 중인 기능입니다.")
                 }
-                openLicense.setOnClickListener {
+                openLicense.throttleClick {
                     showToast("구현 중인 기능입니다.")
                 }
-                helper.setOnClickListener {
+                helper.throttleClick {
                     showToast("구현 중인 기능입니다.")
                 }
             }

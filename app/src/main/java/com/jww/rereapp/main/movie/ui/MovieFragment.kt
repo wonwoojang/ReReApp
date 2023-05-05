@@ -14,6 +14,7 @@ import com.jww.rereapp.common.models.Movie
 import com.jww.rereapp.databinding.FragmentMovieBinding
 import com.jww.rereapp.databinding.ItemMovieListBinding
 import com.jww.rereapp.extension.repeatOnStarted
+import com.jww.rereapp.extension.throttleClick
 import com.jww.rereapp.main.movie.MovieViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -50,7 +51,7 @@ class MovieFragment : BaseFragment() {
 
             this.recycler.adapter = adapter
 
-            this.iconSearch.setOnClickListener {
+            this.iconSearch.throttleClick {
                 viewModel.searchMovie()
             }
         }
