@@ -36,6 +36,7 @@ data class Movie(
         val plots: Plots?,
         val prodYear: String?,
         val rating: String?,
+        val posters: String?,
         val runtime: String?,
         val title: String?,
         val titleEng: String?,

@@ -1,14 +1,13 @@
 package com.jww.rereapp.main.movie
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
+import androidx.paging.*
 import com.jww.rereapp.base.BaseViewModel
 import com.jww.rereapp.common.asEventFlow
-import com.jww.rereapp.common.models.Movie
 import com.jww.rereapp.common.mutableEventFlow
+import com.jww.rereapp.itemModel.MovieAdapterItem
 import com.jww.rereapp.main.movie.ui.MovieUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 
 class MovieViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
 
@@ -16,24 +15,52 @@ class MovieViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
     fun eventFlow() = eventFlow.asEventFlow()
 
     val input = MutableStateFlow("")
-    val movieTotalCount = MutableStateFlow(0)
 
-    fun searchMovie() = viewModelScope.launch {
+    val searchMovieFlow = Pager(config = PagingConfig(pageSize = 10)) {
         val queries: HashMap<String, String> = hashMapOf()
         queries["title"] = input.value
-        useCase.searchMovie(queries).onSuccess {
-            val result = it.body()?.data?.firstOrNull()
-            Log.d("Jww::", "result = ${result}")
-            movieTotalCount.emit(result?.totalCount ?: 0)
-            eventFlow.emit(Event.ResultMovieData(result?.result))
-        }.onFailure {
-            it.printStackTrace()
-        }
-    }
-
+        MoviePagingSource(useCase, queries)
+    }.flow.cachedIn(viewModelScope)
 
     sealed class Event {
-        object Unit : Event()
-        class ResultMovieData(val movieList: List<Movie.Result>?) : Event()
+    }
+
+    inner class MoviePagingSource(
+        private val useCase: MovieUseCase,
+        private val query: HashMap<String, String>?
+    ) :
+        PagingSource<Int, MovieAdapterItem>() {
+        override fun getRefreshKey(state: PagingState<Int, MovieAdapterItem>): Int? {
+            return state.anchorPosition?.let { anchorPosition ->
+                val anchorPage = state.closestPageToPosition(anchorPosition)
+                anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
+
+            }
+        }
+
+        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieAdapterItem> {
+            return try {
+                val nextPageNumber = params.key ?: 0
+                val response =
+                    useCase.searchMoviePaging(query, nextPageNumber * 10).getOrNull()?.body()
+                val result = response?.data?.firstOrNull()?.result
+                val totalCount = response?.totalCount ?: 0
+                LoadResult.Page(
+                    data = result!!.map {
+                        MovieAdapterItem(
+                            it.movieSeq,
+                            it.title,
+                            it.prodYear,
+                            it.posters
+                        )
+                    },
+                    prevKey = null,
+                    nextKey = if ((totalCount % 10) >= nextPageNumber) nextPageNumber + 1 else null
+                )
+
+            } catch (e: java.lang.Exception) {
+                LoadResult.Error(e)
+            }
+        }
     }
 }

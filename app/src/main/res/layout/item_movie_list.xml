@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.jww.rereapp.common.models.Movie.Result" />
+            type="com.jww.rereapp.itemModel.MovieAdapterItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,10 +19,11 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/cover"
-            android:layout_width="wrap_content"
-            android:layout_height="84dp"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_22"
             android:scaleType="fitCenter"
+            app:glide_url="@{item.getPosterUrl()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
@@ -31,6 +32,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimens_10"
             android:text="@{item.title}"
             android:textColor="#303030"
             android:textSize="@dimen/dimens_14"
