@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -44,12 +45,18 @@ class MovieFragment : BaseFragment() {
 
     private fun bind() {
         binding.run {
-            this.vm = viewModel
-            this.lifecycleOwner = viewLifecycleOwner
+            vm = viewModel
+            lifecycleOwner = viewLifecycleOwner
 
-            this.recycler.adapter = adapter
+            recycler.adapter = adapter
 
-            this.iconSearch.throttleClick {
+            search.setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_DONE)
+                    iconSearch.performClick()
+                false
+            }
+
+            iconSearch.throttleClick {
                 viewLifecycleOwner.repeatOnStarted {
                     adapter.submitData(PagingData.empty())
                     viewModel.searchMovieFlow().collectLatest {
