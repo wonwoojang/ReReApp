@@ -6,7 +6,6 @@ import com.jww.rereapp.base.BaseViewModel
 import com.jww.rereapp.common.asEventFlow
 import com.jww.rereapp.common.mutableEventFlow
 import com.jww.rereapp.itemModel.MovieAdapterItem
-import com.jww.rereapp.main.movie.ui.MovieUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class MovieViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
@@ -15,6 +14,7 @@ class MovieViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
     fun eventFlow() = eventFlow.asEventFlow()
 
     val input = MutableStateFlow("")
+    val totalCount = MutableStateFlow(0)
 
     fun searchMovieFlow() = Pager(config = PagingConfig(pageSize = 10)) {
         MoviePagingSource(useCase, input.value)
@@ -43,6 +43,7 @@ class MovieViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
                     useCase.searchMoviePaging(searchWord, nextPageNumber * 10).getOrNull()?.body()
                 val result = response?.data?.firstOrNull()?.result
                 val totalCount = response?.totalCount ?: 0
+                (this@MovieViewModel).totalCount.emit(totalCount)
                 LoadResult.Page(
                     data = result!!.map {
                         MovieAdapterItem(

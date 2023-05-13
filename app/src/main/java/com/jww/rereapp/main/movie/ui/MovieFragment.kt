@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -50,6 +51,7 @@ class MovieFragment : BaseFragment() {
 
             this.iconSearch.throttleClick {
                 viewLifecycleOwner.repeatOnStarted {
+                    adapter.submitData(PagingData.empty())
                     viewModel.searchMovieFlow().collectLatest {
                         adapter.submitData(it)
                     }

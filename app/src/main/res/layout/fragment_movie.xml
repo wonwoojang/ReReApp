@@ -60,9 +60,9 @@
             layout="@layout/include_loading"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search" />
+            app:layout_constraintTop_toBottomOf="@id/search"
+            app:visible="@{vm.totalCount == 0}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

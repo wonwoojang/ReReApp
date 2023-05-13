@@ -1,4 +1,4 @@
-package com.jww.rereapp.main.movie.ui
+package com.jww.rereapp.main.movie
 
 import com.jww.rereapp.common.repository.MovieRepository
 import org.koin.core.component.KoinComponent
