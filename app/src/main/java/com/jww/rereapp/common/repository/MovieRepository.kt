@@ -11,22 +11,27 @@ interface MovieRepository {
         const val SERVICE_KEY = "ServiceKey"
         const val DETAIL = "detail"
         const val COLLECTION = "collection"
+        const val TITLE = "title"
     }
 
-    suspend fun searchMovie(queries: HashMap<String, String>?, startCount: Int?): Response<Movie>
+    suspend fun searchMovie(searchWord: String, startCount: Int): Response<Movie>
 
     class Implement(
         private val app: App,
         private val service: MovieService
     ) : MovieRepository {
         override suspend fun searchMovie(
-            queries: HashMap<String, String>?,
-            startCount: Int?
+            searchWord: String,
+            startCount: Int
         ): Response<Movie> {
-            queries?.put(SERVICE_KEY, app.getString(R.string.movieApiServiceKey))
-            queries?.put(DETAIL, "y")
-            queries?.put(COLLECTION, "kmdb_new2")
-            return service.searchMovie(queries?.toMap(), startCount)
+            val queries = HashMap<String, String>()
+            queries.apply {
+                put(SERVICE_KEY, app.getString(R.string.movieApiServiceKey))
+                put(DETAIL, "y")
+                put(COLLECTION, "kmdb_new2")
+                put(TITLE, searchWord)
+            }
+            return service.searchMovie(queries.toMap(), startCount)
         }
     }
 }

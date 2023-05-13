@@ -16,10 +16,8 @@ class MovieViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
 
     val input = MutableStateFlow("")
 
-    val searchMovieFlow = Pager(config = PagingConfig(pageSize = 10)) {
-        val queries: HashMap<String, String> = hashMapOf()
-        queries["title"] = input.value
-        MoviePagingSource(useCase, queries)
+    fun searchMovieFlow() = Pager(config = PagingConfig(pageSize = 10)) {
+        MoviePagingSource(useCase, input.value)
     }.flow.cachedIn(viewModelScope)
 
     sealed class Event {
@@ -27,7 +25,7 @@ class MovieViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
 
     inner class MoviePagingSource(
         private val useCase: MovieUseCase,
-        private val query: HashMap<String, String>?
+        private val searchWord: String?
     ) :
         PagingSource<Int, MovieAdapterItem>() {
         override fun getRefreshKey(state: PagingState<Int, MovieAdapterItem>): Int? {
@@ -42,7 +40,7 @@ class MovieViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
             return try {
                 val nextPageNumber = params.key ?: 0
                 val response =
-                    useCase.searchMoviePaging(query, nextPageNumber * 10).getOrNull()?.body()
+                    useCase.searchMoviePaging(searchWord, nextPageNumber * 10).getOrNull()?.body()
                 val result = response?.data?.firstOrNull()?.result
                 val totalCount = response?.totalCount ?: 0
                 LoadResult.Page(

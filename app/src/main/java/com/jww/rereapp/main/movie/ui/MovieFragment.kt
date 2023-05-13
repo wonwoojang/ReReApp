@@ -50,7 +50,7 @@ class MovieFragment : BaseFragment() {
 
             this.iconSearch.throttleClick {
                 viewLifecycleOwner.repeatOnStarted {
-                    viewModel.searchMovieFlow.collectLatest {
+                    viewModel.searchMovieFlow().collectLatest {
                         adapter.submitData(it)
                     }
                 }
