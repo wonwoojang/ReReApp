@@ -5,7 +5,7 @@ import org.koin.core.component.KoinComponent
 
 class WebToonUseCase(private val repository: WebToonRepository) : KoinComponent {
 
-    fun searchList(searchWord: String?, pagingNo: Int? = 0) = kotlin.runCatching {
+    suspend fun searchList(searchWord: String?, pagingNo: Int? = 0) = kotlin.runCatching {
         repository.searchList(searchWord!!, pagingNo!!)
     }
 }

@@ -7,8 +7,8 @@ import retrofit2.http.QueryMap
 
 interface WebToonService {
 
-    @GET("rgDtaMasterList")
-    fun searchList(
-        @QueryMap queries: Map<String, String>?,
+    @GET("search/rgDtaMasterList")
+    suspend fun searchList(
+        @QueryMap queries: Map<String, String>?
     ): Response<WebToon>
 }

@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 const val MOVIE_BASE_URL = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/"
-const val WEB_TOON_URL = "http://서비스URL주소/openapi/search/"
+const val WEB_TOON_URL = "http://www.kmas.or.kr/openapi/"
 fun networkModule(
     connectTimeoutSeconds: Long = 30L,
     readTimeoutSeconds: Long = 30L,

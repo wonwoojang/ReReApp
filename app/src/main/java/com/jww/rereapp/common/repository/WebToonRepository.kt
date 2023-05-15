@@ -14,19 +14,18 @@ interface WebToonRepository {
         const val TITLE = "title"
     }
 
-    fun searchList(searchWord: String, pagingNo: Int): Response<WebToon>
+    suspend fun searchList(searchWord: String, pagingNo: Int): Response<WebToon>
 
     class Implement(private val app: App, private val service: WebToonService) : WebToonRepository {
-        override fun searchList(searchWord: String, pagingNo: Int): Response<WebToon> {
+        override suspend fun searchList(searchWord: String, pagingNo: Int): Response<WebToon> {
 
             val queries = HashMap<String, String>().apply {
-                put(PRV_KEY, "")
+                put(PRV_KEY, "fdda34ff8efd9a5ff6177432fcef74cc")
                 put(LIST_SE_CD, "1")
                 put(PAGE_NO, pagingNo.toString())
                 put(VIEW_ITEM_CNT, "10")
                 put(TITLE, searchWord)
             }
-
             return service.searchList(queries)
         }
     }
