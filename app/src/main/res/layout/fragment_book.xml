@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.jww.rereapp.main.webToon.WebToonViewModel" />
+            type="com.jww.rereapp.main.book.BookViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

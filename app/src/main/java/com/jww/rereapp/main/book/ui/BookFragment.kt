@@ -1,4 +1,4 @@
-package com.jww.rereapp.main.webToon.ui
+package com.jww.rereapp.main.book.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,24 +11,24 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.jww.rereapp.base.BaseFragment
-import com.jww.rereapp.databinding.FragmentWebToonBinding
-import com.jww.rereapp.databinding.ItemWebToonListBinding
+import com.jww.rereapp.databinding.FragmentBookBinding
+import com.jww.rereapp.databinding.ItemBookListBinding
 import com.jww.rereapp.extension.repeatOnStarted
 import com.jww.rereapp.extension.throttleClick
-import com.jww.rereapp.itemModel.WebToonAdapterItem
-import com.jww.rereapp.main.webToon.WebToonViewModel
+import com.jww.rereapp.itemModel.BookAdapterItem
+import com.jww.rereapp.main.book.BookViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class WebToonFragment : BaseFragment() {
+class BookFragment : BaseFragment() {
 
-    private var _binding: FragmentWebToonBinding? = null
+    private var _binding: FragmentBookBinding? = null
 
     private val binding
         get() = _binding!!
 
-    private val viewModel by viewModel<WebToonViewModel>()
+    private val viewModel by viewModel<BookViewModel>()
 
     private val adapter by lazy { Adapter() }
 
@@ -37,7 +37,7 @@ class WebToonFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentWebToonBinding.inflate(
+        _binding = FragmentBookBinding.inflate(
             inflater,
             container,
             false
@@ -80,37 +80,37 @@ class WebToonFragment : BaseFragment() {
     private fun submitPage() {
         lifecycleScope.launch {
             adapter.submitData(PagingData.empty())
-            viewModel.searchWebToonFlow().collect {
+            viewModel.searchBookFlow().collect {
                 adapter.submitData(it)
             }
         }
     }
 
-    private fun handle(event: WebToonViewModel.Event) {
+    private fun handle(event: BookViewModel.Event) {
         when (event) {
             else -> Unit
         }
     }
 
-    class Adapter : PagingDataAdapter<WebToonAdapterItem, Adapter.ViewHolder>(object :
-        DiffUtil.ItemCallback<WebToonAdapterItem>() {
+    class Adapter : PagingDataAdapter<BookAdapterItem, Adapter.ViewHolder>(object :
+        DiffUtil.ItemCallback<BookAdapterItem>() {
         override fun areItemsTheSame(
-            oldItem: WebToonAdapterItem,
-            newItem: WebToonAdapterItem
+            oldItem: BookAdapterItem,
+            newItem: BookAdapterItem
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: WebToonAdapterItem,
-            newItem: WebToonAdapterItem
+            oldItem: BookAdapterItem,
+            newItem: BookAdapterItem
         ): Boolean {
             return oldItem == newItem
         }
     }) {
-        class ViewHolder(private val binding: ItemWebToonListBinding) :
+        class ViewHolder(private val binding: ItemBookListBinding) :
             RecyclerView.ViewHolder(binding.root) {
-            fun onBind(item: WebToonAdapterItem) {
+            fun onBind(item: BookAdapterItem) {
                 binding.item = item
             }
         }
@@ -122,7 +122,7 @@ class WebToonFragment : BaseFragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             return ViewHolder(
-                ItemWebToonListBinding.inflate(
+                ItemBookListBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
