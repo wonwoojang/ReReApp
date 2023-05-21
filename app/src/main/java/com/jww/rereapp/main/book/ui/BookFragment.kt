@@ -17,6 +17,7 @@ import com.jww.rereapp.extension.repeatOnStarted
 import com.jww.rereapp.extension.throttleClick
 import com.jww.rereapp.itemModel.BookAdapterItem
 import com.jww.rereapp.main.book.BookViewModel
+import com.jww.rereapp.reEvaluate.ui.ReEvaluateContract
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,7 +31,15 @@ class BookFragment : BaseFragment() {
 
     private val viewModel by viewModel<BookViewModel>()
 
-    private val adapter by lazy { Adapter() }
+    private val launcherReEvaluate = registerForActivityResult(ReEvaluateContract()) {
+
+    }
+
+    private val adapter by lazy {
+        Adapter {
+            launcherReEvaluate.launch(it)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -92,22 +101,23 @@ class BookFragment : BaseFragment() {
         }
     }
 
-    class Adapter : PagingDataAdapter<BookAdapterItem, Adapter.ViewHolder>(object :
-        DiffUtil.ItemCallback<BookAdapterItem>() {
-        override fun areItemsTheSame(
-            oldItem: BookAdapterItem,
-            newItem: BookAdapterItem
-        ): Boolean {
-            return oldItem.id == newItem.id
-        }
+    class Adapter(private val action: (String) -> Unit) :
+        PagingDataAdapter<BookAdapterItem, Adapter.ViewHolder>(object :
+            DiffUtil.ItemCallback<BookAdapterItem>() {
+            override fun areItemsTheSame(
+                oldItem: BookAdapterItem,
+                newItem: BookAdapterItem
+            ): Boolean {
+                return oldItem.id == newItem.id
+            }
 
-        override fun areContentsTheSame(
-            oldItem: BookAdapterItem,
-            newItem: BookAdapterItem
-        ): Boolean {
-            return oldItem == newItem
-        }
-    }) {
+            override fun areContentsTheSame(
+                oldItem: BookAdapterItem,
+                newItem: BookAdapterItem
+            ): Boolean {
+                return oldItem == newItem
+            }
+        }) {
         class ViewHolder(private val binding: ItemBookListBinding) :
             RecyclerView.ViewHolder(binding.root) {
             fun onBind(item: BookAdapterItem) {
@@ -118,6 +128,9 @@ class BookFragment : BaseFragment() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = getItem(position) ?: return
             holder.onBind(item)
+            holder.itemView.throttleClick {
+                action(item.title)
+            }
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

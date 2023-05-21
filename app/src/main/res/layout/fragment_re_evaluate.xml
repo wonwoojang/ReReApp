@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include
+                android:id="@+id/include_item_movie"
+                layout="@layout/item_movie_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <include
+                android:id="@+id/include_item_book"
+                layout="@layout/item_book_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+        <include
+            android:id="@+id/include_watch_number_times"
+            layout="@layout/view_re_evaluate_watch_number_times"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/top" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_01"
+            android:layout_marginHorizontal="@dimen/dimens_24"
+            android:background="#E9E9E9"
+            app:layout_constraintTop_toBottomOf="@id/include_watch_number_times" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
