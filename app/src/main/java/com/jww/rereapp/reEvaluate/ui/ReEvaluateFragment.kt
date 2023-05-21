@@ -30,6 +30,7 @@ class ReEvaluateFragment : BaseFragment() {
         bind()
         observe()
         initWatchNumberTimes()
+        initReason()
     }
 
     private fun initWatchNumberTimes() {
@@ -39,6 +40,17 @@ class ReEvaluateFragment : BaseFragment() {
             addView(makeSelectChip("3회차"))
             addView(makeSelectChip("4회차"))
             addView(makeSelectChip("5회차"))
+        }
+    }
+
+    private fun initReason() {
+        with(binding.includeReason.chipGroup) {
+            addView(makeSelectChip("감독의 연출"))
+            addView(makeSelectChip("배우 연기력"))
+            addView(makeSelectChip("배경 음악"))
+            addView(makeSelectChip("시나리오"))
+            addView(makeSelectChip("기획의도"))
+            addView(makeSelectChip("기타"))
         }
     }
 
@@ -57,9 +69,7 @@ class ReEvaluateFragment : BaseFragment() {
 
     private fun makeSelectChip(message: String): Chip {
         return ItemChipStringRoundBinding.inflate(
-            LayoutInflater.from(requireContext()),
-            binding.includeWatchNumberTimes.chipGroup,
-            false
+            LayoutInflater.from(requireContext())
         ).apply {
             this.message = message
             chip.id = View.NO_ID

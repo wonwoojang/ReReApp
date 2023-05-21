@@ -48,6 +48,7 @@
             layout="@layout/view_re_evaluate_rating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_01"
             app:layout_constraintTop_toBottomOf="@id/include_watch_number_times" />
 
         <View
@@ -55,6 +56,14 @@
             android:layout_height="@dimen/dimens_01"
             android:layout_marginHorizontal="@dimen/dimens_24"
             android:background="#E9E9E9"
+            app:layout_constraintTop_toBottomOf="@id/include_rating" />
+
+        <include
+            android:id="@+id/include_reason"
+            layout="@layout/view_re_evaluate_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_01"
             app:layout_constraintTop_toBottomOf="@id/include_rating" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
