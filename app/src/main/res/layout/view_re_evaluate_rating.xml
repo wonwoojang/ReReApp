@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/dimens_24"
+        android:paddingVertical="@dimen/dimens_16">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="지금 보고 들어보니 어떠세요?"
+            android:textColor="#303030"
+            android:textSize="@dimen/dimens_14"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_16"
+            android:numStars="5"
+            android:progressTint="#FB87AD"
+            android:secondaryProgressTint="@android:color/transparent"
+            android:stepSize="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rating_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimens_08"
+            android:text="5.0"
+            android:textColor="#FB87AD"
+            android:textSize="@dimen/dimens_16"
+            app:layout_constraintBottom_toBottomOf="@id/ratingBar"
+            app:layout_constraintStart_toEndOf="@id/ratingBar"
+            app:layout_constraintTop_toTopOf="@id/ratingBar" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_12"
+            android:text="지금 다시 봐도 돈 아깝지 않음"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimens_16"
+            app:layout_constraintTop_toBottomOf="@id/ratingBar" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
