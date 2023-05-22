@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -29,42 +30,83 @@
                 android:layout_height="wrap_content" />
         </FrameLayout>
 
-        <include
-            android:id="@+id/include_watch_number_times"
-            layout="@layout/view_re_evaluate_watch_number_times"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/save"
+            app:layout_constraintTop_toBottomOf="@id/top">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/include_watch_number_times"
+                    layout="@layout/view_re_evaluate_watch_number_times"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_01"
+                    android:layout_marginHorizontal="@dimen/dimens_24"
+                    android:background="#E9E9E9"
+                    app:layout_constraintTop_toBottomOf="@id/include_watch_number_times" />
+
+                <include
+                    android:id="@+id/include_rating"
+                    layout="@layout/view_re_evaluate_rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimens_01"
+                    app:layout_constraintTop_toBottomOf="@id/include_watch_number_times" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_01"
+                    android:layout_marginHorizontal="@dimen/dimens_24"
+                    android:background="#E9E9E9"
+                    app:layout_constraintTop_toBottomOf="@id/include_rating" />
+
+                <include
+                    android:id="@+id/include_reason"
+                    layout="@layout/view_re_evaluate_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimens_01"
+                    app:layout_constraintTop_toBottomOf="@id/include_rating" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_01"
+                    android:layout_marginHorizontal="@dimen/dimens_24"
+                    android:background="#E9E9E9"
+                    app:layout_constraintTop_toBottomOf="@id/include_reason" />
+
+                <include
+                    android:id="@+id/include_sex_age"
+                    layout="@layout/view_re_evaluate_sex_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimens_01"
+                    app:layout_constraintTop_toBottomOf="@id/include_reason" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/top" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_01"
-            android:layout_marginHorizontal="@dimen/dimens_24"
-            android:background="#E9E9E9"
-            app:layout_constraintTop_toBottomOf="@id/include_watch_number_times" />
-
-        <include
-            android:id="@+id/include_rating"
-            layout="@layout/view_re_evaluate_rating"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimens_01"
-            app:layout_constraintTop_toBottomOf="@id/include_watch_number_times" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_01"
-            android:layout_marginHorizontal="@dimen/dimens_24"
-            android:background="#E9E9E9"
-            app:layout_constraintTop_toBottomOf="@id/include_rating" />
-
-        <include
-            android:id="@+id/include_reason"
-            layout="@layout/view_re_evaluate_reason"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimens_01"
-            app:layout_constraintTop_toBottomOf="@id/include_rating" />
-
+            android:background="#ED7DA2"
+            android:gravity="center"
+            android:minHeight="@dimen/dimens_64"
+            android:text="재평가 등록하기"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimens_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="@tools:sample/lorem" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

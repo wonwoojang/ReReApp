@@ -1,14 +1,18 @@
 package com.jww.rereapp.reEvaluate.ui
 
+import android.R
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.google.android.material.chip.Chip
 import com.jww.rereapp.base.BaseFragment
 import com.jww.rereapp.databinding.FragmentReEvaluateBinding
 import com.jww.rereapp.databinding.ItemChipStringRoundBinding
+import com.jww.rereapp.extension.throttleClick
 
 class ReEvaluateFragment : BaseFragment() {
 
@@ -31,6 +35,7 @@ class ReEvaluateFragment : BaseFragment() {
         observe()
         initWatchNumberTimes()
         initReason()
+        initSexAge()
     }
 
     private fun initWatchNumberTimes() {
@@ -54,11 +59,62 @@ class ReEvaluateFragment : BaseFragment() {
         }
     }
 
+    private fun initSexAge() {
+        binding.includeSexAge.run {
+            this.spinnerSex.adapter = ArrayAdapter(
+                requireContext(),
+                R.layout.simple_spinner_dropdown_item,
+                arrayListOf("남", "녀")
+            )
+
+            val ageItemList = arrayListOf<String>()
+            for (i in 10..80) {
+                ageItemList.add("$i 세")
+            }
+            this.spinnerAge.adapter = ArrayAdapter(
+                requireContext(),
+                R.layout.simple_spinner_dropdown_item,
+                ageItemList
+            )
+        }
+
+    }
+
     private fun bind() {
         binding.run {
 
-            binding.includeWatchNumberTimes.chipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
+            includeWatchNumberTimes.chipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
                 Log.d("Jww::", "change = ${checkedIds}")
+            }
+
+            includeSexAge.run {
+                spinnerSex.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>, view: View, position: Int, id: Long
+                    ) {
+                        Log.d("Jww::", "spinnerSex postion = $position")
+                    }
+
+                    override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                    }
+
+                }
+                spinnerAge.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>, view: View, position: Int, id: Long
+                    ) {
+                        Log.d("Jww::", "spinnerAge postion = $position")
+                    }
+
+                    override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                    }
+                }
+            }
+
+            save.throttleClick {
+
             }
         }
     }
