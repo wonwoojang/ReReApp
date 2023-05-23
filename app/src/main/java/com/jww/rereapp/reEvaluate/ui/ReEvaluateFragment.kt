@@ -2,23 +2,71 @@ package com.jww.rereapp.reEvaluate.ui
 
 import android.R
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.jww.rereapp.base.BaseFragment
 import com.jww.rereapp.databinding.FragmentReEvaluateBinding
 import com.jww.rereapp.databinding.ItemChipStringRoundBinding
 import com.jww.rereapp.extension.throttleClick
+import com.jww.rereapp.reEvaluate.ReEvaluateViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ReEvaluateFragment : BaseFragment() {
 
     private var _binding: FragmentReEvaluateBinding? = null
     private val binding
         get() = _binding!!
+
+    private val viewModel by viewModel<ReEvaluateViewModel>()
+
+    private val watchNumberTimesCheckedListener =
+        ChipGroup.OnCheckedStateChangeListener { group, _ ->
+            viewModel.watchNumberSelected = if (group.checkedChipId != -1) {
+                val chip = group.findViewById(group.checkedChipId) as Chip
+                chip.text.toString()
+            } else null
+        }
+
+    private val sexSelectListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(
+            parent: AdapterView<*>, view: View, position: Int, id: Long
+        ) {
+            viewModel.sexPosition = position
+        }
+
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+
+        }
+    }
+    private val ageSelectListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(
+            parent: AdapterView<*>, view: View, position: Int, id: Long
+        ) {
+            viewModel.agePosition = position
+        }
+
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+
+        }
+    }
+
+    private val reasonCheckedListener =
+        ChipGroup.OnCheckedStateChangeListener { group, checkedChipIds ->
+            viewModel.reasonTextList =
+                if (!checkedChipIds.contains(-1) && checkedChipIds.size > 0) {
+                    val list = mutableListOf<String>()
+                    checkedChipIds.forEach {
+                        val chip = group.findViewById(it) as Chip
+                        list.add(chip.text.toString())
+                    }
+                    list
+                } else null
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,23 +87,14 @@ class ReEvaluateFragment : BaseFragment() {
     }
 
     private fun initWatchNumberTimes() {
-        with(binding.includeWatchNumberTimes.chipGroup) {
-            addView(makeSelectChip("1회차"))
-            addView(makeSelectChip("2회차"))
-            addView(makeSelectChip("3회차"))
-            addView(makeSelectChip("4회차"))
-            addView(makeSelectChip("5회차"))
+        viewModel.watchNumberTimesListData.forEach {
+            binding.includeWatchNumberTimes.chipGroup.addView(makeSelectChip(it))
         }
     }
 
     private fun initReason() {
-        with(binding.includeReason.chipGroup) {
-            addView(makeSelectChip("감독의 연출"))
-            addView(makeSelectChip("배우 연기력"))
-            addView(makeSelectChip("배경 음악"))
-            addView(makeSelectChip("시나리오"))
-            addView(makeSelectChip("기획의도"))
-            addView(makeSelectChip("기타"))
+        viewModel.reasonListData.forEach {
+            binding.includeReason.chipGroup.addView(makeSelectChip(it))
         }
     }
 
@@ -64,54 +103,31 @@ class ReEvaluateFragment : BaseFragment() {
             this.spinnerSex.adapter = ArrayAdapter(
                 requireContext(),
                 R.layout.simple_spinner_dropdown_item,
-                arrayListOf("남", "녀")
+                viewModel.sexListData
             )
 
-            val ageItemList = arrayListOf<String>()
-            for (i in 10..80) {
-                ageItemList.add("$i 세")
-            }
             this.spinnerAge.adapter = ArrayAdapter(
                 requireContext(),
                 R.layout.simple_spinner_dropdown_item,
-                ageItemList
+                viewModel.ageListData
             )
         }
-
     }
 
     private fun bind() {
         binding.run {
-
-            includeWatchNumberTimes.chipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-                Log.d("Jww::", "change = ${checkedIds}")
-            }
+            vm = viewModel
+            lifecycleOwner = viewLifecycleOwner
+            includeWatchNumberTimes.chipGroup.setOnCheckedStateChangeListener(
+                watchNumberTimesCheckedListener
+            )
 
             includeSexAge.run {
-                spinnerSex.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onItemSelected(
-                        parent: AdapterView<*>, view: View, position: Int, id: Long
-                    ) {
-                        Log.d("Jww::", "spinnerSex postion = $position")
-                    }
-
-                    override fun onNothingSelected(p0: AdapterView<*>?) {
-
-                    }
-
-                }
-                spinnerAge.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onItemSelected(
-                        parent: AdapterView<*>, view: View, position: Int, id: Long
-                    ) {
-                        Log.d("Jww::", "spinnerAge postion = $position")
-                    }
-
-                    override fun onNothingSelected(p0: AdapterView<*>?) {
-
-                    }
-                }
+                spinnerSex.onItemSelectedListener = sexSelectListener
+                spinnerAge.onItemSelectedListener = ageSelectListener
             }
+
+            includeReason.chipGroup.setOnCheckedStateChangeListener(reasonCheckedListener)
 
             save.throttleClick {
 

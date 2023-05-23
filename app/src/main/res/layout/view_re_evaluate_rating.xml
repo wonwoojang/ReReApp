@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.jww.rereapp.reEvaluate.ReEvaluateViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,6 +32,7 @@
             android:layout_marginTop="@dimen/dimens_16"
             android:numStars="5"
             android:progressTint="#FB87AD"
+            android:rating="@={vm.rating}"
             android:secondaryProgressTint="@android:color/transparent"
             android:stepSize="1"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_08"
-            android:text="5.0"
+            android:text="@{vm.rating.toString()}"
             android:textColor="#FB87AD"
             android:textSize="@dimen/dimens_16"
             app:layout_constraintBottom_toBottomOf="@id/ratingBar"

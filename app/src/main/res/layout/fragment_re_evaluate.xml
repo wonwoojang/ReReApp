@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.jww.rereapp.reEvaluate.ReEvaluateViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,7 +63,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimens_01"
-                    app:layout_constraintTop_toBottomOf="@id/include_watch_number_times" />
+                    app:layout_constraintTop_toBottomOf="@id/include_watch_number_times"
+                    app:vm="@{vm}" />
 
                 <View
                     android:layout_width="match_parent"
