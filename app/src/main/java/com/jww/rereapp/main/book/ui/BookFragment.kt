@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jww.rereapp.base.BaseFragment
 import com.jww.rereapp.databinding.FragmentBookBinding
 import com.jww.rereapp.databinding.ItemBookListBinding
+import com.jww.rereapp.enums.ContentsType
 import com.jww.rereapp.extension.repeatOnStarted
 import com.jww.rereapp.extension.throttleClick
 import com.jww.rereapp.itemModel.BookAdapterItem
@@ -37,7 +38,12 @@ class BookFragment : BaseFragment() {
 
     private val adapter by lazy {
         Adapter {
-            launcherReEvaluate.launch(it)
+            launcherReEvaluate.launch(
+                ReEvaluateContract.Input(
+                    ContentsType.BOOK,
+                    it
+                )
+            )
         }
     }
 
@@ -101,7 +107,7 @@ class BookFragment : BaseFragment() {
         }
     }
 
-    class Adapter(private val action: (String) -> Unit) :
+    class Adapter(private val action: (BookAdapterItem) -> Unit) :
         PagingDataAdapter<BookAdapterItem, Adapter.ViewHolder>(object :
             DiffUtil.ItemCallback<BookAdapterItem>() {
             override fun areItemsTheSame(
@@ -129,7 +135,7 @@ class BookFragment : BaseFragment() {
             val item = getItem(position) ?: return
             holder.onBind(item)
             holder.itemView.throttleClick {
-                action(item.title)
+                action(item)
             }
         }
 

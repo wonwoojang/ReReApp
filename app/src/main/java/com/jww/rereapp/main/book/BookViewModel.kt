@@ -46,7 +46,13 @@ class BookViewModel(private val useCase: BookUseCase) : BaseViewModel() {
                     ).getOrNull()?.body()
                 totalCount.emit(response?.total ?: 0)
                 val result = response?.items?.map {
-                    BookAdapterItem(it)
+                    BookAdapterItem(
+                        id = it.isbn,
+                        image = it.image,
+                        title = it.title,
+                        description = it.description,
+                        author = it.author
+                    )
                 }
 
                 LoadResult.Page(

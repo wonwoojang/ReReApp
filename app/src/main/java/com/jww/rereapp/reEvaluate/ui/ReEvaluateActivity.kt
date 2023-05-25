@@ -8,7 +8,13 @@ import com.jww.rereapp.base.BaseActivity
 class ReEvaluateActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportFragmentManager.beginTransaction().add(R.id.container, ReEvaluateFragment())
-            .commit()
+        val input =
+            intent?.extras?.getSerializable(ReEvaluateActivity::class.simpleName) as? ReEvaluateContract.Input
+        supportFragmentManager.beginTransaction()
+            .add(R.id.container, ReEvaluateFragment().apply {
+                input?.let {
+                    putArgument(it.contentsType, it.bookAdapterItem)
+                }
+            }).commit()
     }
 }

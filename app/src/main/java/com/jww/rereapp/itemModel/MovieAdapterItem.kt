@@ -5,7 +5,7 @@ data class MovieAdapterItem(
     val title: String?,
     val prodYear: String?,
     private val posters: String?,
-) {
+) : java.io.Serializable {
     fun getPosterUrl(): String? {
         return posters?.split("|")?.firstOrNull()
     }

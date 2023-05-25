@@ -1,20 +1,24 @@
 package com.jww.rereapp.reEvaluate.ui
 
-import android.R
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.os.bundleOf
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.jww.rereapp.base.BaseFragment
 import com.jww.rereapp.databinding.FragmentReEvaluateBinding
 import com.jww.rereapp.databinding.ItemChipStringRoundBinding
+import com.jww.rereapp.enums.ContentsType
 import com.jww.rereapp.extension.throttleClick
+import com.jww.rereapp.itemModel.BookAdapterItem
 import com.jww.rereapp.reEvaluate.ReEvaluateViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class ReEvaluateFragment : BaseFragment() {
 
@@ -22,7 +26,12 @@ class ReEvaluateFragment : BaseFragment() {
     private val binding
         get() = _binding!!
 
-    private val viewModel by viewModel<ReEvaluateViewModel>()
+    private val viewModel by viewModel<ReEvaluateViewModel>() {
+        parametersOf(
+            arguments?.getSerializable(ContentsType::class.simpleName),
+            arguments?.getSerializable(BookAdapterItem::class.simpleName)
+        )
+    }
 
     private val watchNumberTimesCheckedListener =
         ChipGroup.OnCheckedStateChangeListener { group, _ ->
@@ -68,11 +77,21 @@ class ReEvaluateFragment : BaseFragment() {
                 } else null
         }
 
+    fun putArgument(
+        contentsType: ContentsType,
+        bookAdapterItem: BookAdapterItem?
+    ) {
+        arguments = bundleOf().apply {
+            putSerializable(BookAdapterItem::class.simpleName, bookAdapterItem)
+            putSerializable(ContentsType::class.simpleName, contentsType)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentReEvaluateBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -102,13 +121,13 @@ class ReEvaluateFragment : BaseFragment() {
         binding.includeSexAge.run {
             this.spinnerSex.adapter = ArrayAdapter(
                 requireContext(),
-                R.layout.simple_spinner_dropdown_item,
+                android.R.layout.simple_spinner_dropdown_item,
                 viewModel.sexListData
             )
 
             this.spinnerAge.adapter = ArrayAdapter(
                 requireContext(),
-                R.layout.simple_spinner_dropdown_item,
+                android.R.layout.simple_spinner_dropdown_item,
                 viewModel.ageListData
             )
         }

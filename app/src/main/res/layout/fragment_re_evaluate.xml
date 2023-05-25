@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.jww.rereapp.enums.ContentsType" />
+
         <variable
             name="vm"
             type="com.jww.rereapp.reEvaluate.ReEvaluateViewModel" />
@@ -12,7 +14,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#FFF1F6">
 
         <FrameLayout
             android:id="@+id/top"
@@ -24,18 +27,23 @@
                 android:id="@+id/include_item_movie"
                 layout="@layout/item_movie_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:visible="@{vm.contentsType == ContentsType.MOVIE}" />
 
             <include
                 android:id="@+id/include_item_book"
                 layout="@layout/item_book_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:item="@{vm.bookAdapterItem}"
+                app:visible="@{vm.contentsType == ContentsType.BOOK}" />
         </FrameLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dimens_08"
+            android:background="@color/white"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/save"
             app:layout_constraintTop_toBottomOf="@id/top">
