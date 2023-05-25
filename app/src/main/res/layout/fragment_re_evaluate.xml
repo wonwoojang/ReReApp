@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.jww.rereapp.reEvaluate.ReEvaluateViewModel" />
+            type="com.jww.rereapp.re_evaluate.ReEvaluateViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

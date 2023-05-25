@@ -2,7 +2,7 @@ package com.jww.rereapp.di
 
 import com.jww.rereapp.main.book.BookViewModel
 import com.jww.rereapp.main.movie.MovieViewModel
-import com.jww.rereapp.reEvaluate.ReEvaluateViewModel
+import com.jww.rereapp.re_evaluate.ReEvaluateViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

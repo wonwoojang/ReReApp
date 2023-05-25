@@ -1,8 +1,8 @@
-package com.jww.rereapp.reEvaluate
+package com.jww.rereapp.re_evaluate
 
 import com.jww.rereapp.base.BaseViewModel
 import com.jww.rereapp.enums.ContentsType
-import com.jww.rereapp.itemModel.BookAdapterItem
+import com.jww.rereapp.item_model.BookAdapterItem
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class ReEvaluateViewModel(

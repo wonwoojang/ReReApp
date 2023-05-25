@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".reEvaluate.ui.ReEvaluateActivity"
+            android:name=".re_evaluate.ui.ReEvaluateActivity"
             android:screenOrientation="portrait" />
     </application>
 

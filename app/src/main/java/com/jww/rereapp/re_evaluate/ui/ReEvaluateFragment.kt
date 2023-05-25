@@ -1,4 +1,4 @@
-package com.jww.rereapp.reEvaluate.ui
+package com.jww.rereapp.re_evaluate.ui
 
 
 import android.os.Bundle
@@ -15,8 +15,8 @@ import com.jww.rereapp.databinding.FragmentReEvaluateBinding
 import com.jww.rereapp.databinding.ItemChipStringRoundBinding
 import com.jww.rereapp.enums.ContentsType
 import com.jww.rereapp.extension.throttleClick
-import com.jww.rereapp.itemModel.BookAdapterItem
-import com.jww.rereapp.reEvaluate.ReEvaluateViewModel
+import com.jww.rereapp.item_model.BookAdapterItem
+import com.jww.rereapp.re_evaluate.ReEvaluateViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 

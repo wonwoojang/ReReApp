@@ -16,9 +16,9 @@ import com.jww.rereapp.databinding.ItemBookListBinding
 import com.jww.rereapp.enums.ContentsType
 import com.jww.rereapp.extension.repeatOnStarted
 import com.jww.rereapp.extension.throttleClick
-import com.jww.rereapp.itemModel.BookAdapterItem
+import com.jww.rereapp.item_model.BookAdapterItem
 import com.jww.rereapp.main.book.BookViewModel
-import com.jww.rereapp.reEvaluate.ui.ReEvaluateContract
+import com.jww.rereapp.re_evaluate.ui.ReEvaluateContract
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel

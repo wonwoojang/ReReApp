@@ -5,7 +5,7 @@ import androidx.paging.*
 import com.jww.rereapp.base.BaseViewModel
 import com.jww.rereapp.common.asEventFlow
 import com.jww.rereapp.common.mutableEventFlow
-import com.jww.rereapp.itemModel.BookAdapterItem
+import com.jww.rereapp.item_model.BookAdapterItem
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class BookViewModel(private val useCase: BookUseCase) : BaseViewModel() {

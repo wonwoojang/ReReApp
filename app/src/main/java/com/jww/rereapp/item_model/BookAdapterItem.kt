@@ -1,4 +1,4 @@
-package com.jww.rereapp.itemModel
+package com.jww.rereapp.item_model
 
 data class BookAdapterItem(
     val id: String,

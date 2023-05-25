@@ -14,7 +14,7 @@ import com.jww.rereapp.databinding.FragmentMovieBinding
 import com.jww.rereapp.databinding.ItemMovieListBinding
 import com.jww.rereapp.extension.repeatOnStarted
 import com.jww.rereapp.extension.throttleClick
-import com.jww.rereapp.itemModel.MovieAdapterItem
+import com.jww.rereapp.item_model.MovieAdapterItem
 import com.jww.rereapp.main.movie.MovieViewModel
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel

@@ -1,10 +1,10 @@
-package com.jww.rereapp.reEvaluate.ui
+package com.jww.rereapp.re_evaluate.ui
 
 import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
 import com.jww.rereapp.enums.ContentsType
-import com.jww.rereapp.itemModel.BookAdapterItem
+import com.jww.rereapp.item_model.BookAdapterItem
 
 class ReEvaluateContract : ActivityResultContract<ReEvaluateContract.Input, Boolean>() {
     data class Input(

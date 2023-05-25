@@ -1,4 +1,4 @@
-package com.jww.rereapp.reEvaluate.ui
+package com.jww.rereapp.re_evaluate.ui
 
 import android.os.Bundle
 import com.jww.rereapp.R
