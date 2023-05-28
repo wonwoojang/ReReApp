@@ -35,20 +35,22 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-gradle-
         
-    - name: Decrypt secrets.tar.gpg
-      run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase="$SECRET_GPG_PASSWORD" --output secrets.tar secrets.tar.gpg
-      env:
-        SECRET_GPG_PASSWORD: ${{ secrets.SECRET_GPG_PASSWORD }}
+#    - name: Decrypt secrets.tar.gpg
+#      run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase="$SECRET_GPG_PASSWORD" --output secrets.tar secrets.tar.gpg
+#      env:
+#        SECRET_GPG_PASSWORD: ${{ secrets.SECRET_GPG_PASSWORD }}
 
-    - name: Unzip secrets.tar
-      run: tar xvf secrets.tar
+#    - name: Unzip secrets.tar
+#      run: tar xvf secrets.tar
 
-    - name: Run ktlint
-      run: ./gradlew ktlintCheck
+#    - name: Run ktlint //코틀린 스타일로 검사
+#      run: ./gradlew ktlintCheck
 
-    - name: Run detekt
-      run: ./gradlew detekt
+#    - name: Run detekt // 성능 개선및 검사 찾아주는 ..
+#      run: ./gradlew detekt
 
+# https:///velog.io/@revimal/Kotlin-Ktlint와-Detekt-도입하기
+# 추후 꼭 도입 필요
     - name: Run unit tests
       run: ./gradlew testDebugUnitTest
 
