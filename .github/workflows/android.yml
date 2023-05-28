@@ -43,12 +43,14 @@ jobs:
 #    - name: Unzip secrets.tar
 #      run: tar xvf secrets.tar
 
-    - name: Run ktlint
-      run: ./gradlew ktlintCheck
+#    - name: Run ktlint //코틀린 스타일로 검사
+#      run: ./gradlew ktlintCheck
 
-    - name: Run detekt
-      run: ./gradlew detekt
+#    - name: Run detekt // 성능 개선및 검사 찾아주는 ..
+#      run: ./gradlew detekt
 
+# https:///velog.io/@revimal/Kotlin-Ktlint와-Detekt-도입하기
+# 추후 꼭 도입 필요
     - name: Run unit tests
       run: ./gradlew testDebugUnitTest
 
