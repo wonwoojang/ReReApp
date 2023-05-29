@@ -76,8 +76,15 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: android-artifact # Artifact 이름
-          path: ./app/build/outputs/apk/debug # 폴더 지정 : 이 폴더 아래의 모든 파일들이 하나의 artifact로 지정된다.
+          path: ./app/build/outputs/apk/debug/app_rere-debug.apk # 폴더 지정 : 이 폴더 아래의 모든 파일들이 하나의 artifact로 지정된다.
 
+      - name: Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.5.0
+        with:
+          appId: ${{secrets.REREAPP_FIREBASE_APP_ID}}
+          serviceCredentialsFileContent: ${{ secrets.REREAPP_CREDENTIAL_FILE_CONTENT }} # 추후 구글 api콘솔에서 인증키 만들어야함 https://github.com/wzieba/Firebase-Distribution-Github-Action/wiki/FIREBASE_TOKEN-migration
+          groups: wonwoojang
+          file: ./app/build/outputs/apk/debug/app_rere-debug.apk
 
 
 
