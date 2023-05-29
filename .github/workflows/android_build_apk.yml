@@ -9,7 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: action/checkout@v3
+      - name: Check out Repository
+        uses: action/checkout@v3
+
       - name: set up JDK 11
         uses: action/setup-java@v3
         with:
@@ -19,15 +21,18 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Build with Gradle init
-        run: ./gradlew init
-      - name: Build debug APK
-        run: ./gradlew clean assembleDebug --stacktrace
-      - name: Upload APK
-        uses: actions/upload-artifact@v3
-        with:
-          name: apk-artifact
-          path: ./app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Build with Gradle
+        run: ./gradlew assembleDebug
+#      - name: Build with Gradle init
+#        run: ./gradlew init
+#      - name: Build debug APK
+#        run: ./gradlew clean assembleDebug --stacktrace
+#      - name: Upload APK
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: apk-artifact
+#          path: ./app/build/outputs/apk/debug/app-debug.apk
 
 #      - name: Decrypt secrets.tar.gpg
 #        run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase="$SECRET_GPG_PASSWORD" --output secrets.tar secrets.tar.gpg
