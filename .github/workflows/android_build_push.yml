@@ -4,7 +4,8 @@ on:
     branches: [ "feature_main/android_cd" ]
 
 jobs:
-  apk:
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
