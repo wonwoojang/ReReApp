@@ -71,8 +71,6 @@ jobs:
 
       - name: Build assemble debug apk
         run: ./gradlew clean assembleDebug --stacktrace
-        with:
-          file_type: 'apk'
 
       - name: Upload Apk
         uses: actions/upload-artifact@v3
