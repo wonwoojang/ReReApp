@@ -75,8 +75,8 @@ jobs:
       - name: Upload Apk
         uses: actions/upload-artifact@v3
         with:
-          name: android-artifact # Artifact 이름
-          path: ./app/build/outputs/apk/debug/app_rere-debug.apk # 폴더 지정 : 이 폴더 아래의 모든 파일들이 하나의 artifact로 지정된다.
+          name: android-artifact.apk # Artifact 이름
+          path: ./app/build/outputs/apk/debug/ # 폴더 지정 : 이 폴더 아래의 모든 파일들이 하나의 artifact로 지정된다.
 
 #      - name: Firebase App Distribution
 #        uses: wzieba/Firebase-Distribution-Github-Action@v1
