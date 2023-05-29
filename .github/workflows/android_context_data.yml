@@ -1,4 +1,7 @@
 name: Context Data
+
+#on: Work Flow 가 언제 실행되어야 하는지 설정
+#workflow_dispatch: 유저가 직접 실행하도록 설정하는 옵션
 on: workflow_dispatch
 
 jobs:
