@@ -25,7 +25,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle  # 테스트 실행행
-        run: .gradlew build
+        run: ./gradlew check
 
   build_apk:
     needs: check
