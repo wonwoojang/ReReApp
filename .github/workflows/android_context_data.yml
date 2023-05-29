@@ -1,0 +1,9 @@
+name: Context Data
+on: workflow_dispatch
+
+jobs:
+  print-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print GitHub Context
+        run: echo "${{ toJSON(github) }}
