@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "39100317747",
-    "project_id": "rereapp-ca52d",
-    "storage_bucket": "rereapp-ca52d.appspot.com"
+    "project_number": "115322352008",
+    "project_id": "rereapp-201c2",
+    "storage_bucket": "rereapp-201c2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:39100317747:android:3ba61f1be68a71f33b2346",
+        "mobilesdk_app_id": "1:115322352008:android:146eebc25e293ad4440a3d",
         "android_client_info": {
           "package_name": "com.jww.rereapp"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "39100317747-5n8ghbjbjp7ulvpm3i4tulq8b6vavmui.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB69GO8qgSAaYL8y6Me5AmUOAoG1TcDVm4"
+          "current_key": "AIzaSyA1gcy2oOPHgO2cbkirubIpg7Vjhz5FuF0"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "39100317747-5n8ghbjbjp7ulvpm3i4tulq8b6vavmui.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
