@@ -69,11 +69,11 @@ jobs:
       - name: Build with Gradle init
         run: ./gradlew init
 
-#      - name: Build assemble debug apk
-#        run: ./gradlew clean assembleDebug --stacktrace
+      - name: Build assemble debug apk
+        run: ./gradlew clean assembleDebug --stacktrace
 
-      - name: Build assemble release apk
-        run: ./gradlew clean assembleRelease --stacktrace
+#      - name: Build assemble release apk
+#        run: ./gradlew clean assembleRelease --stacktrace
 
       - name: Upload debug Apk
         uses: actions/upload-artifact@v3
