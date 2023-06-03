@@ -6,12 +6,10 @@
 
         <variable
             name="vm"
-            type="com.jww.rereapp.main.movie.MovieViewModel" />
-
+            type="com.jww.rereapp.main.book.BookViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/root_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -30,7 +28,7 @@
             android:layout_height="?android:attr/actionBarSize"
             android:background="@android:color/transparent"
             android:ellipsize="end"
-            android:hint="영화 제목을 입력 하세요."
+            android:hint="웹툰 제목을 입력 하세요."
             android:inputType="text"
             android:maxLength="30"
             android:maxLines="1"
@@ -49,7 +47,7 @@
             app:layout_constraintBottom_toBottomOf="@id/search" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"

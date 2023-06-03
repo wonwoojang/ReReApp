@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="message"
+            type="String" />
+    </data>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip"
+        style="@style/Widget.MaterialComponents.Chip.Choice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/dimens_96"
+        android:minHeight="@dimen/dimens_40"
+        android:paddingHorizontal="31dp"
+        android:paddingVertical="10dp"
+        android:text="@{message}"
+        android:textAlignment="center"
+        android:textColor="@color/checked_chip_text_color"
+        android:textSize="14dp"
+        app:chipBackgroundColor="@color/checked_chip_bg_color"
+        app:chipStrokeColor="@color/checked_chip_stroke_color"
+        app:chipStrokeWidth="1dp"
+        tools:text="@tools:sample/lorem" />
+</layout>

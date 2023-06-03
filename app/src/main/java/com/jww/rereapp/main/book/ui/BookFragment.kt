@@ -1,36 +1,49 @@
-package com.jww.rereapp.main.movie.ui
+package com.jww.rereapp.main.book.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.jww.rereapp.base.BaseFragment
-import com.jww.rereapp.databinding.FragmentMovieBinding
-import com.jww.rereapp.databinding.ItemMovieListBinding
+import com.jww.rereapp.databinding.FragmentBookBinding
+import com.jww.rereapp.databinding.ItemBookListBinding
+import com.jww.rereapp.enums.ContentsType
 import com.jww.rereapp.extension.repeatOnStarted
 import com.jww.rereapp.extension.throttleClick
-import com.jww.rereapp.item_model.MovieAdapterItem
-import com.jww.rereapp.main.movie.MovieViewModel
-import com.jww.rereapp.product_detail.ui.ProductDetailFragment
+import com.jww.rereapp.item_model.BookAdapterItem
+import com.jww.rereapp.main.book.BookViewModel
+import com.jww.rereapp.re_evaluate.ui.ReEvaluateContract
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MovieFragment : BaseFragment() {
-    private var _binding: FragmentMovieBinding? = null
+class BookFragment : BaseFragment() {
+
+    private var _binding: FragmentBookBinding? = null
+
     private val binding
         get() = _binding!!
 
-    private val viewModel by viewModel<MovieViewModel>()
+    private val viewModel by viewModel<BookViewModel>()
+
+    private val launcherReEvaluate = registerForActivityResult(ReEvaluateContract()) {
+
+    }
 
     private val adapter by lazy {
         Adapter {
-            childFragmentManager.beginTransaction()
-                .add(binding.rootContainer.id, ProductDetailFragment()).commit()
+            launcherReEvaluate.launch(
+                ReEvaluateContract.Input(
+                    ContentsType.BOOK,
+                    it
+                )
+            )
         }
     }
 
@@ -39,7 +52,11 @@ class MovieFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMovieBinding.inflate(inflater, container, false)
+        _binding = FragmentBookBinding.inflate(
+            inflater,
+            container,
+            false
+        )
         return binding.root
     }
 
@@ -54,21 +71,15 @@ class MovieFragment : BaseFragment() {
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            recycler.adapter = adapter
+            recyclerView.adapter = adapter
 
             search.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_DONE)
                     iconSearch.performClick()
                 false
             }
-
             iconSearch.throttleClick {
-                viewLifecycleOwner.repeatOnStarted {
-                    adapter.submitData(PagingData.empty())
-                    viewModel.searchMovieFlow().collectLatest {
-                        adapter.submitData(it)
-                    }
-                }
+                submitPage()
             }
         }
     }
@@ -81,33 +92,41 @@ class MovieFragment : BaseFragment() {
         }
     }
 
-    private fun handle(event: MovieViewModel.Event) {
+    private fun submitPage() {
+        lifecycleScope.launch {
+            adapter.submitData(PagingData.empty())
+            viewModel.searchBookFlow().collect {
+                adapter.submitData(it)
+            }
+        }
+    }
+
+    private fun handle(event: BookViewModel.Event) {
         when (event) {
             else -> Unit
         }
     }
 
-    class Adapter(private val action: (MovieAdapterItem) -> Unit) :
-        PagingDataAdapter<MovieAdapterItem, Adapter.ViewHolder>(object :
-            DiffUtil.ItemCallback<MovieAdapterItem>() {
+    class Adapter(private val action: (BookAdapterItem) -> Unit) :
+        PagingDataAdapter<BookAdapterItem, Adapter.ViewHolder>(object :
+            DiffUtil.ItemCallback<BookAdapterItem>() {
             override fun areItemsTheSame(
-                oldItem: MovieAdapterItem,
-                newItem: MovieAdapterItem
+                oldItem: BookAdapterItem,
+                newItem: BookAdapterItem
             ): Boolean {
-                return oldItem.movieSeq == newItem.movieSeq
+                return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: MovieAdapterItem,
-                newItem: MovieAdapterItem
+                oldItem: BookAdapterItem,
+                newItem: BookAdapterItem
             ): Boolean {
                 return oldItem == newItem
             }
         }) {
-        class ViewHolder(private val binding: ItemMovieListBinding) :
+        class ViewHolder(private val binding: ItemBookListBinding) :
             RecyclerView.ViewHolder(binding.root) {
-
-            fun onBind(item: MovieAdapterItem) {
+            fun onBind(item: BookAdapterItem) {
                 binding.item = item
             }
         }
@@ -122,7 +141,7 @@ class MovieFragment : BaseFragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             return ViewHolder(
-                ItemMovieListBinding.inflate(
+                ItemBookListBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false

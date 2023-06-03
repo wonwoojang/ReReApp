@@ -1,7 +1,7 @@
 package com.jww.rereapp.di
 
 import com.jww.rereapp.common.service.MovieService
-import com.jww.rereapp.common.service.WebToonService
+import com.jww.rereapp.common.service.NaverSearchService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 const val MOVIE_BASE_URL = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/"
-const val WEB_TOON_URL = "http://서비스URL주소/openapi/search/"
+const val NAVER_URL = "https://openapi.naver.com/v1/"
 fun networkModule(
     connectTimeoutSeconds: Long = 30L,
     readTimeoutSeconds: Long = 30L,
@@ -49,13 +49,13 @@ fun networkModule(
     }
 
     single {
-        val webToonRetrofit =
+        val naverRetrofit =
             Retrofit.Builder()
                 .client(get())
-                .baseUrl(WEB_TOON_URL)
+                .baseUrl(NAVER_URL)
                 .addConverterFactory(GsonConverterFactory.create(get()))
                 .build()
 
-        webToonRetrofit.create(WebToonService::class.java)
+        naverRetrofit.create(NaverSearchService::class.java)
     }
 }

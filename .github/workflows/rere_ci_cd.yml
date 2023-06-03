@@ -1,0 +1,85 @@
+name: RereApp CI CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest # 사용 되어질 os 버전
+
+    steps:
+      - name: Check out Repository #깃허브에서 ci 서버로 코드를 내려 받는 액션
+        uses: actions/checkout@v3
+
+      - name: Cache Gradle # 빌드시 캐시 작업(Actions 는 빌드 시간으로 무료 유료 처리함 무료 사용자 : 2000분, Pro 사용자 3000
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*','**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: set up JDK 11  # 안드로이드 빌드 해주어야 하기때문에 JDK 필요
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew  #gradle 실행 권한 부여
+        run: chmod +x gradlew
+
+      - name: Build with Gradle  # 테스트 실행행
+        run: ./gradlew check
+
+  build:
+    needs: check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Repository
+        uses: actions/checkout@v3
+
+      - name: set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle init
+        run: ./gradlew init
+
+      #    Debug 버전 ========================================================
+
+      - name: Build assemble debug apk
+        run: ./gradlew clean assembleDebug --stacktrace
+
+      - name: Upload debug Apk
+        uses: actions/upload-artifact@v3
+        with:
+          name: rereapp-debug.apk # Artifact 이름
+          path: ./app/build/outputs/apk/debug/app-debug.apk # 폴더 지정 : 이 폴더 아래의 모든 파일들이 하나의 artifact로 지정된다.?
+          retention-days: 1 # 보존 기간
+
+      # ========================================================
+
+      #      Release 버전 ========================================================
+
+      #      - name: Build assemble release apk
+      #        run: ./gradlew clean assembleRelease --stacktrace
+
+      #      - name: Upload release Apk
+      #        uses: actions/upload-artifact@v3
+      #        with:
+      #          name: rereapp-release.apk # Artifact 이름
+      #          path: ./app/build/outputs/apk/release/app-release-unsigned.apk # 폴더 지정 : 이 폴더 아래의 모든 파일들이 하나의 artifact로 지정된다.?
+      #          retention-days: 1 # 보존 기간
+
+      # ========================================================

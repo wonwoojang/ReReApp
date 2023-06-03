@@ -58,4 +58,15 @@
     <dimen name="dimens_69">69dp</dimen>
     <dimen name="dimens_70">70dp</dimen>
 
+    <dimen name="dimens_91">91dp</dimen>
+    <dimen name="dimens_92">92dp</dimen>
+    <dimen name="dimens_93">93dp</dimen>
+    <dimen name="dimens_94">94dp</dimen>
+    <dimen name="dimens_95">95dp</dimen>
+    <dimen name="dimens_96">96dp</dimen>
+    <dimen name="dimens_97">97dp</dimen>
+    <dimen name="dimens_98">98dp</dimen>
+    <dimen name="dimens_99">99dp</dimen>
+    <dimen name="dimens_100">100dp</dimen>
+
 </resources>

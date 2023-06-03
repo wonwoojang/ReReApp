@@ -14,10 +14,10 @@ import com.jww.rereapp.base.BaseFragment
 import com.jww.rereapp.databinding.FragmentNavigationBinding
 import com.jww.rereapp.databinding.ItemNavigationTabBinding
 import com.jww.rereapp.enums.NavigationType
+import com.jww.rereapp.main.book.ui.BookFragment
 import com.jww.rereapp.main.info.ui.InfoFragment
 import com.jww.rereapp.main.movie.ui.MovieFragment
 import com.jww.rereapp.main.rere.ui.ReReFragment
-import com.jww.rereapp.main.webToon.ui.WebToonFragment
 
 class NavigationFragment : BaseFragment() {
 
@@ -65,7 +65,7 @@ class NavigationFragment : BaseFragment() {
                 NavigationType.MOVIE -> {
                     this.name.text = NavigationType.getType(position).value
                 }
-                NavigationType.WEBTOON -> {
+                NavigationType.BOOK -> {
                     this.name.text = NavigationType.getType(position).value
                 }
                 NavigationType.INFO -> {
@@ -88,7 +88,7 @@ class NavigationFragment : BaseFragment() {
             return when (NavigationType.getType(position)) {
                 NavigationType.RERE -> ReReFragment()
                 NavigationType.MOVIE -> MovieFragment()
-                NavigationType.WEBTOON -> WebToonFragment()
+                NavigationType.BOOK -> BookFragment()
                 NavigationType.INFO -> InfoFragment()
             }
         }

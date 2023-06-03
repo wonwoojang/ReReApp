@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -8,49 +7,67 @@
 
         <variable
             name="item"
-            type="com.jww.rereapp.item_model.MovieAdapterItem" />
+            type="com.jww.rereapp.item_model.BookAdapterItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingVertical="@dimen/dimens_16">
+        android:padding="@dimen/dimens_16">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/cover"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimens_22"
             android:scaleType="fitCenter"
-            app:glide_url="@{item.getPosterUrl()}"
+            app:glide_url="@{item.image}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_10"
             android:text="@{item.title}"
             android:textColor="#303030"
             android:textSize="@dimen/dimens_14"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/cover"
             app:layout_constraintTop_toTopOf="@id/cover"
             tools:text="@tools:sample/lorem" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/open"
-            android:layout_width="wrap_content"
+            android:id="@+id/outline"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{item.prodYear}"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{item.description}"
             android:textColor="#303030"
             android:textSize="@dimen/dimens_14"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="@tools:sample/lorem" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/age"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{item.author}"
+            android:textColor="#303030"
+            android:textSize="@dimen/dimens_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/outline"
+            app:layout_constraintTop_toBottomOf="@id/outline"
             tools:text="@tools:sample/lorem" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

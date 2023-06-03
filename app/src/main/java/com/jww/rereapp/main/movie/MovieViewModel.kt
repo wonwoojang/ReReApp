@@ -5,7 +5,7 @@ import androidx.paging.*
 import com.jww.rereapp.base.BaseViewModel
 import com.jww.rereapp.common.asEventFlow
 import com.jww.rereapp.common.mutableEventFlow
-import com.jww.rereapp.itemModel.MovieAdapterItem
+import com.jww.rereapp.item_model.MovieAdapterItem
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class MovieViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
