@@ -97,6 +97,7 @@ jobs:
           groups: "안드로이드 개발자"
           file: ./app/build/outputs/apk/debug/app-debug.apk  # debug 파일
     #          file: ./app/build/outputs/apk/release/app-release-unsigned.apk  # release 파일
+    #     releaseNotesFile: documents/release-note/default-note.txt  추후 추가 필요
 
 
 
@@ -120,16 +121,15 @@ jobs:
     # https:///velog.io/@revimal/Kotlin-Ktlint와-Detekt-도입하기
     # 추후 꼭 도입 필요
 #      - name: Run unit tests
-#        run: ./gradlew testDebugUnitTest
+#        run: ./gradlew testDebugUnitTest // 빌들 방식에따라 만들수 있다 참고! 추후 필요할수도 있음
 #
-#      - name: Build assemble release apk
+#      - name: Build assemble release apk //
 #        run: ./gradlew assembleRelease
 #
-#      - name: Create android test report
+#      - name: Create android test report // 리포트?
 #        uses: asadmansr/android-test-report-action@v1.2.0
 #        if: ${{ always() }}
 #
-
 
 
 
@@ -140,15 +140,3 @@ jobs:
 #
 #      - name: Unzip secrets.tar
 #        run: tar xvf secrets.tar
-
-#      - name: Build release universal apk
-#        run: ./gradlew presentation:packageReleaseUniversalApk
-#
-#      - name: Upload apk to Firebase App Distribution
-#        uses: wzieba/Firebase-Distribution-Github-Action@v1
-#        with:
-#          appId: ${{ secrets.FIREBASE_APP_ID }}
-#          token: ${{ secrets.FIREBASE_TOKEN }}
-#          groups: runnerbe
-#          file: presentation/build/outputs/universal_apk/release/presentation-release-universal.apk
-#          releaseNotesFile: documents/release-note/default-note.txt
