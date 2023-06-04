@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jww.rereapp.base.BaseFragment
 import com.jww.rereapp.databinding.FragmentBookBinding
 import com.jww.rereapp.databinding.ItemBookListBinding
-import com.jww.rereapp.enums.ContentsType
 import com.jww.rereapp.extension.repeatOnStarted
 import com.jww.rereapp.extension.throttleClick
 import com.jww.rereapp.item_model.BookAdapterItem
 import com.jww.rereapp.main.book.BookViewModel
+import com.jww.rereapp.product_detail.ui.ProductDetailFragment
 import com.jww.rereapp.re_evaluate.ui.ReEvaluateContract
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -32,18 +32,13 @@ class BookFragment : BaseFragment() {
 
     private val viewModel by viewModel<BookViewModel>()
 
-    private val launcherReEvaluate = registerForActivityResult(ReEvaluateContract()) {
-
-    }
 
     private val adapter by lazy {
         Adapter {
-            launcherReEvaluate.launch(
-                ReEvaluateContract.Input(
-                    ContentsType.BOOK,
-                    it
-                )
-            )
+            childFragmentManager.beginTransaction()
+                .add(binding.rootContainer.id, ProductDetailFragment(), null)
+                .commit()
+
         }
     }
 
