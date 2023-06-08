@@ -15,10 +15,9 @@ import com.jww.rereapp.databinding.FragmentBookBinding
 import com.jww.rereapp.databinding.ItemBookListBinding
 import com.jww.rereapp.extension.repeatOnStarted
 import com.jww.rereapp.extension.throttleClick
-import com.jww.rereapp.item_model.BookAdapterItem
+import com.jww.rereapp.item_model.ProductAdapterItem
 import com.jww.rereapp.main.book.BookViewModel
-import com.jww.rereapp.product_detail.ui.ProductDetailFragment
-import com.jww.rereapp.re_evaluate.ui.ReEvaluateContract
+import com.jww.rereapp.product_detail.ui.ProductDetailContract
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,12 +31,13 @@ class BookFragment : BaseFragment() {
 
     private val viewModel by viewModel<BookViewModel>()
 
+    private val launcherProductDetail = registerForActivityResult(ProductDetailContract()) {
+
+    }
 
     private val adapter by lazy {
         Adapter {
-            childFragmentManager.beginTransaction()
-                .add(binding.rootContainer.id, ProductDetailFragment(), null)
-                .commit()
+            launcherProductDetail.launch(ProductDetailContract.Input(it))
 
         }
     }
@@ -102,26 +102,26 @@ class BookFragment : BaseFragment() {
         }
     }
 
-    class Adapter(private val action: (BookAdapterItem) -> Unit) :
-        PagingDataAdapter<BookAdapterItem, Adapter.ViewHolder>(object :
-            DiffUtil.ItemCallback<BookAdapterItem>() {
+    class Adapter(private val action: (ProductAdapterItem.BookAdapterItem) -> Unit) :
+        PagingDataAdapter<ProductAdapterItem.BookAdapterItem, Adapter.ViewHolder>(object :
+            DiffUtil.ItemCallback<ProductAdapterItem.BookAdapterItem>() {
             override fun areItemsTheSame(
-                oldItem: BookAdapterItem,
-                newItem: BookAdapterItem
+                oldItem: ProductAdapterItem.BookAdapterItem,
+                newItem: ProductAdapterItem.BookAdapterItem
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: BookAdapterItem,
-                newItem: BookAdapterItem
+                oldItem: ProductAdapterItem.BookAdapterItem,
+                newItem: ProductAdapterItem.BookAdapterItem
             ): Boolean {
                 return oldItem == newItem
             }
         }) {
         class ViewHolder(private val binding: ItemBookListBinding) :
             RecyclerView.ViewHolder(binding.root) {
-            fun onBind(item: BookAdapterItem) {
+            fun onBind(item: ProductAdapterItem.BookAdapterItem) {
                 binding.item = item
             }
         }

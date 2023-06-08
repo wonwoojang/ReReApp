@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.jww.rereapp.item_model.MovieAdapterItem" />
+            type="com.jww.rereapp.item_model.ProductAdapterItem.MovieAdapterItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

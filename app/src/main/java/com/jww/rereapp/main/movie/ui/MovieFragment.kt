@@ -14,9 +14,9 @@ import com.jww.rereapp.databinding.FragmentMovieBinding
 import com.jww.rereapp.databinding.ItemMovieListBinding
 import com.jww.rereapp.extension.repeatOnStarted
 import com.jww.rereapp.extension.throttleClick
-import com.jww.rereapp.item_model.MovieAdapterItem
+import com.jww.rereapp.item_model.ProductAdapterItem
 import com.jww.rereapp.main.movie.MovieViewModel
-import com.jww.rereapp.product_detail.ui.ProductDetailFragment
+import com.jww.rereapp.product_detail.ui.ProductDetailContract
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,10 +27,13 @@ class MovieFragment : BaseFragment() {
 
     private val viewModel by viewModel<MovieViewModel>()
 
+    private val launcherProductDetail = registerForActivityResult(ProductDetailContract()) {
+
+    }
+
     private val adapter by lazy {
         Adapter {
-            childFragmentManager.beginTransaction()
-                .add(binding.rootContainer.id, ProductDetailFragment()).commit()
+            launcherProductDetail.launch(ProductDetailContract.Input(it))
         }
     }
 
@@ -87,19 +90,19 @@ class MovieFragment : BaseFragment() {
         }
     }
 
-    class Adapter(private val action: (MovieAdapterItem) -> Unit) :
-        PagingDataAdapter<MovieAdapterItem, Adapter.ViewHolder>(object :
-            DiffUtil.ItemCallback<MovieAdapterItem>() {
+    class Adapter(private val action: (ProductAdapterItem.MovieAdapterItem) -> Unit) :
+        PagingDataAdapter<ProductAdapterItem.MovieAdapterItem, Adapter.ViewHolder>(object :
+            DiffUtil.ItemCallback<ProductAdapterItem.MovieAdapterItem>() {
             override fun areItemsTheSame(
-                oldItem: MovieAdapterItem,
-                newItem: MovieAdapterItem
+                oldItem: ProductAdapterItem.MovieAdapterItem,
+                newItem: ProductAdapterItem.MovieAdapterItem
             ): Boolean {
                 return oldItem.movieSeq == newItem.movieSeq
             }
 
             override fun areContentsTheSame(
-                oldItem: MovieAdapterItem,
-                newItem: MovieAdapterItem
+                oldItem: ProductAdapterItem.MovieAdapterItem,
+                newItem: ProductAdapterItem.MovieAdapterItem
             ): Boolean {
                 return oldItem == newItem
             }
@@ -107,7 +110,7 @@ class MovieFragment : BaseFragment() {
         class ViewHolder(private val binding: ItemMovieListBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
-            fun onBind(item: MovieAdapterItem) {
+            fun onBind(item: ProductAdapterItem.MovieAdapterItem) {
                 binding.item = item
             }
         }

@@ -5,8 +5,6 @@
 
     <data>
 
-        <import type="com.jww.rereapp.enums.ContentsType" />
-
         <variable
             name="vm"
             type="com.jww.rereapp.re_evaluate.ReEvaluateViewModel" />
@@ -28,7 +26,8 @@
                 layout="@layout/item_movie_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:visible="@{vm.contentsType == ContentsType.MOVIE}" />
+                app:item="@{vm.movieAdapterItem}"
+                app:visible="@{vm.movieAdapterItem != null}" />
 
             <include
                 android:id="@+id/include_item_book"
@@ -36,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:item="@{vm.bookAdapterItem}"
-                app:visible="@{vm.contentsType == ContentsType.BOOK}" />
+                app:visible="@{vm.bookAdapterItem != null}" />
         </FrameLayout>
 
         <ScrollView

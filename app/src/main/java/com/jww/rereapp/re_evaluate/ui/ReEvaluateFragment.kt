@@ -13,9 +13,8 @@ import com.google.android.material.chip.ChipGroup
 import com.jww.rereapp.base.BaseFragment
 import com.jww.rereapp.databinding.FragmentReEvaluateBinding
 import com.jww.rereapp.databinding.ItemChipStringRoundBinding
-import com.jww.rereapp.enums.ContentsType
 import com.jww.rereapp.extension.throttleClick
-import com.jww.rereapp.item_model.BookAdapterItem
+import com.jww.rereapp.item_model.ProductAdapterItem
 import com.jww.rereapp.re_evaluate.ReEvaluateViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -26,10 +25,9 @@ class ReEvaluateFragment : BaseFragment() {
     private val binding
         get() = _binding!!
 
-    private val viewModel by viewModel<ReEvaluateViewModel>() {
+    private val viewModel by viewModel<ReEvaluateViewModel> {
         parametersOf(
-            arguments?.getSerializable(ContentsType::class.simpleName),
-            arguments?.getSerializable(BookAdapterItem::class.simpleName)
+            arguments?.getSerializable(ProductAdapterItem::class.simpleName)
         )
     }
 
@@ -78,12 +76,10 @@ class ReEvaluateFragment : BaseFragment() {
         }
 
     fun putArgument(
-        contentsType: ContentsType,
-        bookAdapterItem: BookAdapterItem?
+        productAdapterItem: ProductAdapterItem?
     ) {
         arguments = bundleOf().apply {
-            putSerializable(BookAdapterItem::class.simpleName, bookAdapterItem)
-            putSerializable(ContentsType::class.simpleName, contentsType)
+            putSerializable(ProductAdapterItem::class.simpleName, productAdapterItem)
         }
     }
 
@@ -149,7 +145,6 @@ class ReEvaluateFragment : BaseFragment() {
             includeReason.chipGroup.setOnCheckedStateChangeListener(reasonCheckedListener)
 
             save.throttleClick {
-
             }
         }
     }

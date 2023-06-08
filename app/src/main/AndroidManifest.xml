@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".re_evaluate.ui.ReEvaluateActivity"
+            android:name=".product_detail.ui.ProductDetailActivity"
             android:screenOrientation="portrait" />
     </application>
 

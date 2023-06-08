@@ -5,7 +5,7 @@ import androidx.paging.*
 import com.jww.rereapp.base.BaseViewModel
 import com.jww.rereapp.common.asEventFlow
 import com.jww.rereapp.common.mutableEventFlow
-import com.jww.rereapp.item_model.BookAdapterItem
+import com.jww.rereapp.item_model.ProductAdapterItem
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class BookViewModel(private val useCase: BookUseCase) : BaseViewModel() {
@@ -24,15 +24,15 @@ class BookViewModel(private val useCase: BookUseCase) : BaseViewModel() {
     inner class BookPagingSource(
         private val useCase: BookUseCase,
         private val searchWord: String?
-    ) : PagingSource<Int, BookAdapterItem>() {
-        override fun getRefreshKey(state: PagingState<Int, BookAdapterItem>): Int? {
+    ) : PagingSource<Int, ProductAdapterItem.BookAdapterItem>() {
+        override fun getRefreshKey(state: PagingState<Int, ProductAdapterItem.BookAdapterItem>): Int? {
             return state.anchorPosition?.let { anchorPosition ->
                 val anchorPage = state.closestPageToPosition(anchorPosition)
                 anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
             }
         }
 
-        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, BookAdapterItem> {
+        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductAdapterItem.BookAdapterItem> {
             return try {
                 val nextPageNumber = params.key ?: 0
 
@@ -46,7 +46,7 @@ class BookViewModel(private val useCase: BookUseCase) : BaseViewModel() {
                     ).getOrNull()?.body()
                 totalCount.emit(response?.total ?: 0)
                 val result = response?.items?.map {
-                    BookAdapterItem(
+                    ProductAdapterItem.BookAdapterItem(
                         id = it.isbn,
                         image = it.image,
                         title = it.title,

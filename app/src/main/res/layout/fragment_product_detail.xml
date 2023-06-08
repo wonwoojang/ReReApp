@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.jww.rereapp.product_detail.ProductDetailViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,13 +36,17 @@
                     android:id="@+id/movie"
                     layout="@layout/item_movie_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    app:item="@{vm.movieAdapterItem}"
+                    app:visible="@{vm.movieAdapterItem != null}" />
 
                 <include
                     android:id="@+id/book"
                     layout="@layout/item_book_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    app:item="@{vm.bookAdapterItem}"
+                    app:visible="@{vm.bookAdapterItem != null}" />
 
                 <include
                     android:id="@+id/content"

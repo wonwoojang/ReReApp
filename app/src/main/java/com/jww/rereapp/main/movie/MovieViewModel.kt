@@ -5,7 +5,7 @@ import androidx.paging.*
 import com.jww.rereapp.base.BaseViewModel
 import com.jww.rereapp.common.asEventFlow
 import com.jww.rereapp.common.mutableEventFlow
-import com.jww.rereapp.item_model.MovieAdapterItem
+import com.jww.rereapp.item_model.ProductAdapterItem
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class MovieViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
@@ -27,8 +27,8 @@ class MovieViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
         private val useCase: MovieUseCase,
         private val searchWord: String?
     ) :
-        PagingSource<Int, MovieAdapterItem>() {
-        override fun getRefreshKey(state: PagingState<Int, MovieAdapterItem>): Int? {
+        PagingSource<Int, ProductAdapterItem.MovieAdapterItem>() {
+        override fun getRefreshKey(state: PagingState<Int, ProductAdapterItem.MovieAdapterItem>): Int? {
             return state.anchorPosition?.let { anchorPosition ->
                 val anchorPage = state.closestPageToPosition(anchorPosition)
                 anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
@@ -36,7 +36,7 @@ class MovieViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
             }
         }
 
-        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieAdapterItem> {
+        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductAdapterItem.MovieAdapterItem> {
             return try {
                 val nextPageNumber = params.key ?: 0
                 val response =
@@ -46,7 +46,7 @@ class MovieViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
                 (this@MovieViewModel).totalCount.emit(totalCount)
                 LoadResult.Page(
                     data = result!!.map {
-                        MovieAdapterItem(
+                        ProductAdapterItem.MovieAdapterItem(
                             it.movieSeq,
                             it.title,
                             it.prodYear,
