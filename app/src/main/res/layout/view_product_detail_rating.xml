@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.jww.rereapp.product_detail.ProductDetailViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,30 +28,21 @@
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/spinner"
-                app:layout_constraintEnd_toStartOf="@id/spinner"
+                android:text="2022년 재평가 평점"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@tools:sample/lorem" />
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toEndOf="@id/title"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatRatingBar
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimens_40"
-                android:isIndicator="false"
+                android:isIndicator="true"
                 android:progressTint="#FB87AD"
-                android:rating="5"
+                android:rating="@{vm.rating}"
                 android:secondaryProgressTint="@android:color/transparent"
                 android:stepSize="1"
                 app:layout_constraintEnd_toStartOf="@id/rating"
@@ -57,6 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimens_05"
+                android:text="@{vm.rating.toString()}"
                 android:textColor="#FB87AD"
                 android:textSize="16dp"
                 android:textStyle="bold"

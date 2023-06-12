@@ -78,7 +78,7 @@ class MovieFragment : BaseFragment() {
 
     private fun observe() {
         repeatOnStarted {
-            viewModel.eventFlow().collectLatest {
+            viewModel.eventFlow().collect {
                 handle(it)
             }
         }

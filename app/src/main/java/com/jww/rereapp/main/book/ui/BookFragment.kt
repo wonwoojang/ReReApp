@@ -18,7 +18,6 @@ import com.jww.rereapp.extension.throttleClick
 import com.jww.rereapp.item_model.ProductAdapterItem
 import com.jww.rereapp.main.book.BookViewModel
 import com.jww.rereapp.product_detail.ui.ProductDetailContract
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -81,7 +80,7 @@ class BookFragment : BaseFragment() {
 
     private fun observe() {
         repeatOnStarted {
-            viewModel.eventFlow().collectLatest {
+            viewModel.eventFlow().collect {
                 handle(it)
             }
         }

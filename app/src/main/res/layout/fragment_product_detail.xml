@@ -17,7 +17,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:fillViewport="true"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/register"
@@ -52,7 +52,8 @@
                     android:id="@+id/content"
                     layout="@layout/view_product_detail_body"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    app:vm="@{vm}" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </ScrollView>
