@@ -2,30 +2,72 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.jww.rereapp.product_detail.ProductDetailViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <include
             android:id="@+id/rating"
             layout="@layout/view_product_detail_rating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:vm="@{vm}" />
 
         <include
             android:id="@+id/evaluation"
             layout="@layout/view_product_detail_evaluation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/rating" />
+            app:layout_constraintTop_toBottomOf="@id/rating"
+            app:vm="@{vm}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/sex_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_33"
+            android:gravity="center"
+            android:text="2022년 재평가 관객 성별"
+            android:textColor="#303030"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/evaluation" />
 
         <include
-            android:id="@+id/chart"
+            android:id="@+id/sex_chart"
             layout="@layout/view_product_detail_chart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/evaluation" />
+            app:layout_constraintTop_toBottomOf="@id/sex_title"
+            app:vm="@{vm}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/age_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_33"
+            android:gravity="center"
+            android:text="2022년 재평가 관객 나이별"
+            android:textColor="#303030"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/sex_chart" />
+
+        <include
+            android:id="@+id/age_chart"
+            layout="@layout/view_product_detail_chart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/age_title"
+            app:vm="@{vm}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

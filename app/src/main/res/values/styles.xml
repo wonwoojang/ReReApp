@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="alert_dialog_form" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="colorAccent">@color/alert_default_base_title</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColorPrimary">@color/alert_default_base_message</item>
+        <item name="android:windowTitleStyle">@style/alert_dialog_title_style</item>
+        <item name="buttonBarPositiveButtonStyle">@style/alert_button_positive_style</item>
+        <item name="buttonBarNegativeButtonStyle">@style/alert_button_negative_style</item>
+        <item name="buttonBarNeutralButtonStyle">@style/alert_button_neutral_style</item>
+        <item name="android:topRightRadius">12dp</item>
+        <item name="android:topLeftRadius">12dp</item>
+        <item name="android:bottomRightRadius">12dp</item>
+        <item name="android:bottomLeftRadius">12dp</item>
+    </style>
+
+    <style name="alert_dialog_title_style" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="alert_button_positive_style" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/alert_default_base_btn_ok_text</item>
+    </style>
+
+    <style name="alert_button_negative_style" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/alert_default_base_btn_close_text</item>
+    </style>
+
+    <style name="alert_button_neutral_style" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/alert_default_base_btn_close_text</item>
+    </style>
+</resources>

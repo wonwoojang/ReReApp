@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.jww.rereapp.item_model.BookAdapterItem" />
+            type="com.jww.rereapp.item_model.ProductAdapterItem.BookAdapterItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

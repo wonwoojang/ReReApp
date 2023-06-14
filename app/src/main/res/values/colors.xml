@@ -13,4 +13,12 @@
     <color name="base_reversal_color">#FFF6F9</color>
     <color name="line_color">#E9E9E9</color>
     <color name="edit_search_hint_color">#ACACAC</color>
+
+    <!--default alert-->
+    <color name="alert_default_base">#FB87AD</color>
+    <color name="alert_default_base_title">#FF000000</color>
+    <color name="alert_default_base_message">#FF000000</color>
+    <color name="alert_default_base_btn_ok_text">#FB87AD</color>
+    <color name="alert_default_base_btn_close_text">#9E9E9E</color>
+    <!--    -->
 </resources>

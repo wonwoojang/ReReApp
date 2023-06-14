@@ -1,13 +1,11 @@
 package com.jww.rereapp.re_evaluate
 
 import com.jww.rereapp.base.BaseViewModel
-import com.jww.rereapp.enums.ContentsType
-import com.jww.rereapp.item_model.BookAdapterItem
+import com.jww.rereapp.item_model.ProductAdapterItem
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class ReEvaluateViewModel(
-    val contentsType: ContentsType,
-    val bookAdapterItem: BookAdapterItem?
+    productAdapterItem: ProductAdapterItem?
 ) : BaseViewModel() {
     val watchNumberTimesListData = listOf("1회차", "2회차", "3회차", "4회차", "5회차")
     val reasonListData = listOf("감독의 연출", "배우 연기력", "배경 음악", "시나리오", "기획 의도", "기타")
@@ -17,6 +15,12 @@ class ReEvaluateViewModel(
             this.add("$i 세")
         }
     }
+
+    val bookAdapterItem =
+        MutableStateFlow(productAdapterItem as? ProductAdapterItem.BookAdapterItem)
+
+    val movieAdapterItem =
+        MutableStateFlow(productAdapterItem as? ProductAdapterItem.MovieAdapterItem)
 
     val rating = MutableStateFlow(0.0f)
 
