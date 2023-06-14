@@ -13,6 +13,7 @@ import com.google.android.material.chip.ChipGroup
 import com.jww.rereapp.base.BaseFragment
 import com.jww.rereapp.databinding.FragmentReEvaluateBinding
 import com.jww.rereapp.databinding.ItemChipStringRoundBinding
+import com.jww.rereapp.extension.alertDialog
 import com.jww.rereapp.extension.throttleClick
 import com.jww.rereapp.item_model.ProductAdapterItem
 import com.jww.rereapp.re_evaluate.ReEvaluateViewModel
@@ -145,6 +146,11 @@ class ReEvaluateFragment : BaseFragment() {
             includeReason.chipGroup.setOnCheckedStateChangeListener(reasonCheckedListener)
 
             save.throttleClick {
+                context.alertDialog {
+                    setMessage("재평가를 하시겠습니까?")
+                    setPositiveButton("확인", null)
+                    setNegativeButton("취소", null)
+                }
             }
         }
     }
