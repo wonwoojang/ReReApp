@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -17,7 +18,7 @@ import com.jww.rereapp.extension.throttleClick
 import com.jww.rereapp.item_model.ProductAdapterItem
 import com.jww.rereapp.main.movie.MovieViewModel
 import com.jww.rereapp.product_detail.ui.ProductDetailContract
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieFragment : BaseFragment() {
@@ -66,9 +67,9 @@ class MovieFragment : BaseFragment() {
             }
 
             iconSearch.throttleClick {
-                viewLifecycleOwner.repeatOnStarted {
+                lifecycleScope.launch {
                     adapter.submitData(PagingData.empty())
-                    viewModel.searchMovieFlow().collectLatest {
+                    viewModel.searchMovieFlow().collect {
                         adapter.submitData(it)
                     }
                 }
